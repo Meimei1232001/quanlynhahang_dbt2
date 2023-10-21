@@ -1,6 +1,49 @@
 <?php
+include('./common/connection.php');
+
     include("./common/checksession.php");
     $activePage = 'dashboard';
+    $sql = "SELECT SUM(tong_tien) AS total_revenue FROM hoadon WHERE MONTH(thoi_gian) = 10";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $totalRevenue = $row["total_revenue"];
+        echo "Tổng doanh thu trong tháng 10 là: $totalRevenue";
+    } else {
+        echo "Không có hóa đơn nào trong tháng 10.";
+    }
+    $sql = "SELECT COUNT(*) AS total_hoadon FROM hoadon WHERE MONTH(thoi_gian) = 10";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalHoadon = $row["total_hoadon"];
+    echo "Số lượng hóa đơn trong tháng 10 là: $totalHoadon";
+} else {
+    echo "Không có hóa đơn nào trong tháng 10.";
+}
+$sql = "SELECT thucdon.ten_mon, SUM(chitiethoadon.so_luong) AS total_quantity
+        FROM chitiethoadon
+        INNER JOIN hoadon ON chitiethoadon.ma_hoa_don = hoadon.ma_hoa_don
+        INNER JOIN thucdon ON chitiethoadon.mon_an_id = thucdon.id
+        WHERE MONTH(hoadon.thoi_gian) = 10
+        GROUP BY chitiethoadon.mon_an_id
+        ORDER BY total_quantity DESC
+        LIMIT 1";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $mostOrderedFood = $row["ten_mon"];
+    $totalQuantity = $row["total_quantity"];
+    echo "Món ăn được đặt nhiều nhất trong tháng 10 là: $mostOrderedFood (Số lượng: $totalQuantity)";
+} else {
+    echo "Không có dữ liệu về đơn đặt hàng trong tháng 10.";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +79,15 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Doanh thu trong tháng</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                 <?php
+// Lấy tháng hiện tại
+$currentMonth = date('m');
+
+// Hiển thị tháng hiện tại
+echo "Doanh thu tháng $currentMonth";
+?>
+</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo  number_format($totalRevenue, 0, '.', ',') ?>đ</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -54,8 +104,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Lượt khách trong tháng</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                <?php echo "Lượt khách trong tháng" ?> </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo  number_format($totalHoadon, 0, '.', ',') ?> </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -71,19 +122,16 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                <?php echo "món ăn được đặt nhiều nhất"?> 
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                        <?php echo $mostOrderedFood ?>
                                                     </div>
                                                 </div>
+                                                 
                                             </div>
                                         </div>
                                         <div class="col-auto">

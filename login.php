@@ -33,7 +33,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào mừng!</h1>
                                     </div>
-                                    <form class="user" action="./service/login-service.php" method="POST"">
+                                    <form class="user" action="./service/login-service.php" method="POST">
                                         
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"

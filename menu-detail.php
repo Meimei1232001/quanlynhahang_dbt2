@@ -2,7 +2,6 @@
     include("./common/checksession.php");
     include("./common/connection.php");
     $activePage = 'menu';
-    // Truy vấn để lấy tổng số các lớp học
     if (isset($_GET['id'])) {
         $type = "EDIT";
         $id = $_GET['id'];

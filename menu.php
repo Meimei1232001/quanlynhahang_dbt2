@@ -38,16 +38,21 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 header-container">
                             <h6 class="m-0 font-weight-bold text-primary flex1">Thực đơn</h6>
-                            <a class="button-create" href="./menu-detail.php">
-                                <div><i class="fas fa-plus text-light"></i></div>
-                                <div>Thêm món ăn</div>
-                            <a>
+                            <?php 
+                                if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN") {?>
+                                    <a class="button-create" href="./menu-detail.php">
+                                        <div><i class="fas fa-plus text-light"></i></div>
+                                        <div>Thêm món ăn</div>
+                                    <a>
+                                <?php }
+                            ?>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            
                                             <th>Tên món ăn</th>
                                             <th>Đơn giá</th>
                                             <th style="width: 200px"></th>

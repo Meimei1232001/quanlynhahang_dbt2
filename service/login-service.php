@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION['username'] = $username; // Lưu tên đăng nhập vào phiên làm việc (session)
         $_SESSION['userid'] = $row['account_id']; // Lưu tên đăng nhập vào phiên làm việc (session)
+        $_SESSION['role'] = $row['role']; // Lưu tên đăng nhập vào phiên làm việc (session)
         header("Location: ../index.php"); // Chuyển hướng đến trang chào mừng
         exit();
     } else {
