@@ -38,10 +38,14 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 header-container">
                             <h6 class="m-0 font-weight-bold text-primary flex1">Tài khoản</h6>
+                            <?php 
+                                if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN") {?>
                             <a class="button-create" href='./taikhoan-detail.php'>
                                 <div><i class="fas fa-plus text-light"></i></div>
                                 <div>Tạo tài khoản</div>
                             <a>
+                                <?php }
+                                ?>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -63,12 +67,16 @@
                                                 <td><?php echo $row["role"]?></td>
                                                 <td><?php echo $row["nvten"]?></td>
                                                 <td>
+                                                <?php 
+                                if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN") {?>
                                                     <a href='./taikhoan-detail.php?id=<?php echo $row["account_id"] ?>' class='button-edit text-secondary font-weight-bold' >
                                                         Chỉnh sửa
                                                     </a>
-                                                    <a href='./taikhoan-delete.php?id=<?php echo $row["account_id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
+                                                    <a href='./taikhoan-delete.php?id=<?php echo $row["account_id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa tài khoản này?")'>
                                                         Xóa
                                                     </a>
+                                                    <?php }
+                                ?>
                                                 </td>
                                             </tr>
                                         <?php

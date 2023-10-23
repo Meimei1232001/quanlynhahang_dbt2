@@ -64,7 +64,7 @@
                                                     <a href='./khachhang-detail.php?id=<?php echo $row["id"] ?>' class='button-edit text-secondary font-weight-bold' >
                                                         Chỉnh sửa
                                                     </a>
-                                                    <a href='./khachhang-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
+                                                    <a href='./khachhang-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa khách hàng này?")'>
                                                         Xóa
                                                     </a>
                                                 </td>

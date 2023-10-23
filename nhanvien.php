@@ -38,10 +38,15 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 header-container">
                             <h6 class="m-0 font-weight-bold text-primary flex1">Nhân viên</h6>
+                            <?php 
+                                if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN") {?>
                             <a class="button-create" href='./nhanvien-detail.php'>
                                 <div><i class="fas fa-plus text-light"></i></div>
                                 <div>Thêm nhân viên</div>
                             <a>
+                            <?php }
+                            ?>
+                                
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -69,12 +74,16 @@
                                                 <td><?php echo $row["ca_lam_viec"]?></td>
                                                 <td><?php echo $row["luong"]?></td>
                                                 <td>
+                                                <?php
+                                                     if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN"){?>
                                                     <a href='./nhanvien-detail.php?id=<?php echo $row["id"] ?>' class='button-edit text-secondary font-weight-bold' >
                                                         Chỉnh sửa
                                                     </a>
-                                                    <a href='./nhanvien-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
+                                                    <a href='./nhanvien-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa nhân viên này?")'>
                                                         Xóa
                                                     </a>
+                                                    <?php }
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php

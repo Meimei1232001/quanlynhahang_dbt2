@@ -52,7 +52,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            
+                          
                                             <th>Tên món ăn</th>
                                             <th>Đơn giá</th>
                                             <th style="width: 200px"></th>
@@ -66,12 +66,16 @@
                                                 <td><?php echo $row["ten_mon"]?></td>
                                                 <td><?php echo $row["don_gia"]?></td>
                                                 <td>
+                                                    <?php
+                                                     if (isset($_SESSION['role']) && $_SESSION['role'] === "ADMIN"){?>
                                                     <a href='./menu-detail.php?id=<?php echo $row["id"] ?>' class='button-edit text-secondary font-weight-bold' >
                                                         Chỉnh sửa
                                                     </a>
                                                     <a href='./menu-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
                                                         Xóa
                                                     </a>
+                                                    <?php }
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php

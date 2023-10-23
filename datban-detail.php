@@ -90,9 +90,9 @@
                                     <tr>
                                         <td><?php echo $hashMonAn[$row["mon_an_id"]]?></td>
                                         <td><?php echo $row["so_luong"]?></td>
-                                        <td><?php echo $row["so_luong"]*$hashDonGia[$row["mon_an_id"]]?></td>
+                                        <td><?php echo number_format($row["so_luong"]*$hashDonGia[$row["mon_an_id"]], 0, '.', ',')?></td>
                                         <td>
-                                            <a href='./chitiethoadon-delete.php?id=<?php echo $row["id"] ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
+                                            <a href='./chitiethoadon-delete.php?id=<?php echo $row["id"] ?>&ban=<?php echo $codeBan ?>&hoadon=<?php echo $hoaDonId ?>' class='button-delete text-secondary font-weight-bold' onclick='return confirm("Bạn có chắc muốn xóa món ăn này?")'>
                                                 Xóa
                                             </a>
                                         </td>
@@ -127,6 +127,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div style="margin-bottom: 20px">
+                            <strong>Tổng số tiền: <?php echo number_format($tongSoTien, 0, '.', ',') ?></strong>
+                        </div>
                         <div style="display:flex">
                             <a href="./datban.php" class="button-quaylai">Quay lại</a>
                             <?php if($type==="BUSY") echo "<a href='thanhtoan.php?hoadonid=$hoaDonId&total=$tongSoTien&ban=$codeBan' class='button-thanhtoan'>Thanh toán</a>"?>

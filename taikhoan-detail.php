@@ -65,7 +65,7 @@
                             <div class="form-group">
                                 <label for="lastName">Quyền <span class="text-danger">*</span></label>
                                 <select class="form-control" name="role">
-                                    <option value="ADMIN" <?php echo $row['role'] == "ADMIN"? "selected": ""; ?>>Admin</option>
+                                    <option value="ADMIN" <?php echo isset($row) && $row['role'] == "ADMIN"? "selected": ""; ?>>Admin</option>
                                     <option value="STAFF" <?php echo $type=="NEW" ? "selected" : ($row['role'] == "STAFF"? "selected": ""); ?>>Nhân viên</option>
                                 </select>
                             </div>
